@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Meesho Review Extractor",
+  "version": "1.0.0",
+  "description": "Scrape product reviews from Meesho and export to CSV or TXT",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.meesho.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
