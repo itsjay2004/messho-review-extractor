@@ -7,10 +7,18 @@
 </head>
 <body>
   <div class="popup">
-    <header>
-      <h1>Meesho Review Extractor</h1>
-      <p class="subtitle">Scrape reviews from this product page</p>
+    <header class="header-with-logo">
+      <img src="logo.png" alt="" class="logo" />
+      <div class="header-text">
+        <h1>Meesho Review Extractor</h1>
+        <p class="subtitle">Scrape reviews from this product page</p>
+      </div>
+      <button id="themeToggle" class="theme-toggle" title="Toggle dark/light theme" aria-label="Theme"></button>
     </header>
+
+    <div id="reminder" class="reminder hidden" role="status">
+      <p>Open a Meesho product page to scrape reviews.</p>
+    </div>
 
     <div class="actions">
       <button id="scrapeBtn" class="btn btn-primary">Scrape reviews</button>
@@ -19,15 +27,25 @@
     <div id="status" class="status" aria-live="polite"></div>
 
     <div id="results" class="results hidden">
-      <p class="count"><span id="reviewCount">0</span> reviews scraped</p>
-      <div class="export-buttons">
-        <button id="exportCsv" class="btn btn-secondary">Export CSV</button>
-        <button id="exportTxt" class="btn btn-secondary">Export TXT</button>
+      <div class="product-title-wrap">
+        <span class="product-title-label">Product:</span>
+        <p class="product-title" id="productTitleLabel" title="">—</p>
       </div>
+      <p class="count"><span id="reviewCount">0</span> reviews scraped <span id="lastSavedLabel" class="last-saved"></span></p>
+      <div id="preview" class="preview"></div>
+      <div class="export-row">
+        <span class="export-label">Export:</span>
+        <div class="export-buttons">
+          <button id="exportCsv" class="btn btn-secondary">CSV</button>
+          <button id="exportTxt" class="btn btn-secondary">TXT</button>
+          <button id="exportJson" class="btn btn-secondary">JSON</button>
+        </div>
+      </div>
+      <button id="copyBtn" class="btn btn-outline">Copy to clipboard</button>
     </div>
 
     <footer>
-      <p>Open a Meesho product page, then click Scrape. Scroll the reviews section if needed for more results.</p>
+      <p>Open a Meesho product page (or "View all reviews") then click Scrape. Last result is saved so you can export again without re-scraping.</p>
     </footer>
   </div>
   <script src="popup.js"></script>

@@ -1,11 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Meesho Review Extractor",
-  "version": "1.0.0",
-  "description": "Scrape product reviews from Meesho and export to CSV or TXT",
-  "permissions": ["activeTab", "scripting"],
+  "version": "1.2.0",
+  "description": "Scrape product reviews from Meesho and export to CSV, TXT, or JSON",
+  "permissions": ["activeTab", "scripting", "storage"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "logo.png",
+      "48": "logo.png",
+      "128": "logo.png"
+    }
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
   },
   "content_scripts": [
     {

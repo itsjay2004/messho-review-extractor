@@ -1,13 +1,14 @@
 # Meesho Review Extractor
 
-Chrome extension to scrape product reviews from Meesho product pages and export them to **CSV** or **TXT**.
+Chrome extension to scrape product reviews from Meesho product pages and export them to **CSV**, **TXT**, or **JSON**. Includes logo, review preview, and copy-to-clipboard.
 
 ## How to install
 
-1. Open Chrome and go to `chrome://extensions/`.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select the folder: `Messho Review Extractor` (this project folder).
-4. The extension icon will appear in the toolbar.
+1. Place **logo.png** in this folder (used for the extension icon and popup header).
+2. Open Chrome and go to `chrome://extensions/`.
+3. Turn on **Developer mode** (top right).
+4. Click **Load unpacked** and select the folder: `Messho Review Extractor` (this project folder).
+5. The extension icon (your logo) will appear in the toolbar.
 
 ## How to use
 
@@ -15,12 +16,22 @@ Chrome extension to scrape product reviews from Meesho product pages and export 
 2. Scroll down so the **Reviews** section is visible (and scroll within reviews if there is “Load more”).
 3. Click the **Meesho Review Extractor** icon in the toolbar.
 4. Click **Scrape reviews** in the popup.
-5. When scraping finishes, use **Export CSV** or **Export TXT** to download the file.
+5. Use **Export** (CSV / TXT / JSON) or **Copy to clipboard** to save the data.
+
+## Features
+
+- **Logo** — Your `logo.png` is used as the toolbar icon and in the popup header.
+- **Review preview** — First 3 reviews shown in the popup after scraping.
+- **Export CSV** — Columns: Rating, Review, Author, Date (for Excel/Sheets).
+- **Export TXT** — Plain text with product info and one block per review.
+- **Export JSON** — Full structured data (productTitle, url, scrapedAt, reviews array).
+- **Copy to clipboard** — Copies all reviews as CSV for pasting into a spreadsheet.
 
 ## Export formats
 
 - **CSV**: Columns `Rating`, `Review`, `Author`, `Date` — suitable for Excel/Sheets.
 - **TXT**: Plain text with a header (product, URL, date) and each review in a simple block.
+- **JSON**: Structured object with metadata and `reviews` array.
 
 ## Notes
 

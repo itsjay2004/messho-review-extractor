@@ -111,9 +111,17 @@
 
     const reviews = extractMeeshoReviews();
 
+    const h1 = document.querySelector('h1');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const productTitle =
+      getText(h1) ||
+      getText(document.querySelector('[class*="ProductTitle"]')) ||
+      getText(document.querySelector('[class*="product-title"]')) ||
+      (ogTitle ? (ogTitle.getAttribute('content') || '').trim() : '') ||
+      document.title;
     return {
       url: window.location.href,
-      productTitle: getText(document.querySelector('h1, [class*="product-title"], [class*="title"]')) || document.title,
+      productTitle: (productTitle || document.title).trim(),
       scrapedAt: new Date().toISOString(),
       reviews,
     };
