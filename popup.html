@@ -1,52 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Meesho Review Extractor</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="popup">
-    <header class="header-with-logo">
-      <img src="logo.png" alt="" class="logo" />
-      <div class="header-text">
-        <h1>Meesho Review Extractor</h1>
-        <p class="subtitle">Scrape reviews from this product page</p>
+  <div class="app">
+
+    <header>
+      <div class="brand">
+        <img src="logo.png" alt="" class="logo" />
+        <div class="brand-text">
+          <span class="brand-name">Meesho</span>
+          <span class="brand-sub">Review Extractor</span>
+        </div>
       </div>
-      <button id="themeToggle" class="theme-toggle" title="Toggle dark/light theme" aria-label="Theme"></button>
+      <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"></button>
     </header>
 
-    <div id="reminder" class="reminder hidden" role="status">
-      <p>Open a Meesho product page to scrape reviews.</p>
+    <div id="reminder" class="alert hidden" role="status">
+      <svg class="alert-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 2L2 17h16L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M10 8v4M10 14.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <p>Navigate to a <strong>Meesho product page</strong> to start extracting reviews.</p>
     </div>
 
-    <div class="actions">
-      <button id="scrapeBtn" class="btn btn-primary">Scrape reviews</button>
+    <div class="scrape-area">
+      <button id="scrapeBtn" class="scrape-btn">
+        <span class="btn-spinner" aria-hidden="true"></span>
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="scrape-label">Scrape Reviews</span>
+      </button>
     </div>
 
     <div id="status" class="status" aria-live="polite"></div>
 
     <div id="results" class="results hidden">
-      <div class="product-title-wrap">
-        <span class="product-title-label">Product:</span>
-        <p class="product-title" id="productTitleLabel" title="">—</p>
+
+      <div class="product-info">
+        <div class="product-label">Product</div>
+        <div class="product-name" id="productTitleLabel" title="">—</div>
       </div>
-      <p class="count"><span id="reviewCount">0</span> reviews scraped <span id="lastSavedLabel" class="last-saved"></span></p>
-      <div id="preview" class="preview"></div>
-      <div class="export-row">
-        <span class="export-label">Export:</span>
-        <div class="export-buttons">
-          <button id="exportCsv" class="btn btn-secondary">CSV</button>
-          <button id="exportTxt" class="btn btn-secondary">TXT</button>
-          <button id="exportJson" class="btn btn-secondary">JSON</button>
+
+      <div class="stats-row">
+        <div class="stat-chip">
+          <span id="reviewCount" class="stat-number">0</span>
+          <span class="stat-label">reviews scraped</span>
+        </div>
+        <span id="lastSavedLabel" class="saved-badge hidden">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" width="10" height="10">
+            <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          saved
+        </span>
+      </div>
+
+      <div id="preview" class="preview-list"></div>
+
+      <div class="divider"></div>
+
+      <div class="export-section">
+        <span class="section-label">Export as</span>
+        <div class="export-pills">
+          <button id="exportCsv" class="pill-btn" title="Download as CSV">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+              <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M1 5h12M5 5v8" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            CSV
+          </button>
+          <button id="exportTxt" class="pill-btn" title="Download as plain text">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+              <path d="M2 2h10M2 5h10M2 8h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            TXT
+          </button>
+          <button id="exportJson" class="pill-btn" title="Download as JSON">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+              <path d="M4 2C3 2 2 3 2 4v1c0 1-1 1-1 2s1 1 1 2v1c0 1 1 2 2 2M10 2c1 0 2 1 2 2v1c0 1 1 1 1 2s-1 1-1 2v1c0 1-1 2-2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            JSON
+          </button>
         </div>
       </div>
-      <button id="copyBtn" class="btn btn-outline">Copy to clipboard</button>
+
+      <button id="copyBtn" class="copy-btn">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+          <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        Copy to clipboard
+      </button>
+
     </div>
 
     <footer>
-      <p>Open a Meesho product page (or "View all reviews") then click Scrape. Last result is saved so you can export again without re-scraping.</p>
+      <p>Open a Meesho product page (or "View all reviews") then click Scrape. Your last result is saved locally.</p>
     </footer>
+
   </div>
   <script src="popup.js"></script>
 </body>
